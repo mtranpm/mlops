@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default # Your Argo CD project
   source:
-    repoURL: https://github.com/mtranpm/mlops.git # Where your Kubernetes YAML file is stored
+    repoURL: https://github.com/mtranpm/mlops/tree/main/argocd # Where your Kubernetes YAML file is stored
     targetRevision: main
     path: /manifest/dev # The path to your mlflow-deployment.yaml
   destination:
