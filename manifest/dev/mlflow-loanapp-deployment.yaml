@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-inference
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: mlflow-inference-loanapp
+  template:
+    metadata:
+      labels:
+        app: mlflow-inference-loanapp
+    spec:
+      containers:
+      - name: mlflow-container-loanapp
+        image: docker.io/mtranpm/general:v1
+        ports:
+        - containerPort: 8080 # Must match the port in your Dockerfile/mlflow serve command
+        resources: # Optional resource requests and limits
+          requests:
+            cpu: 500m
+            memory: 500Mi
+          limits:
+            cpu: 10000m
+            memory: 1024Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-inference-service
+spec:
+  selector:
+    app: mlflow-inference-loanapp
+  ports:
+  - protocol: TCP
+    port: 80 # The port exposed externally
+    targetPort: 8080 # The port the container is listening on
+  type: LoadBalancer # Or ClusterIP if you're using an Ingress
