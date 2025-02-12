@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlflow-inference-loanapp
+spec:
+  project: loanapp # Your Argo CD project
+  source:
+    repoURL: https://github.com/mtranpm/mlops.git # Where your Kubernetes YAML file is stored
+    targetRevision: main
+    path: /manifest/loanapp # The path to your mlflow-deployment.yaml
+  destination:
+    server: https://kubernetes.default.svc # Your Kubernetes cluster API server
+    namespace: argocd # The Kubernetes namespace to deploy to
+  syncPolicy:
+    automated: # Automatically sync changes
+      selfHeal: true
+      prune: true
