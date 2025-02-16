@@ -17,13 +17,13 @@ spec:
         image: docker.io/mtranpm/general:v1
         ports:
         - containerPort: 80 # Must match the port in your Dockerfile/mlflow serve command
-        resources: # Optional resource requests and limits
-          requests:
-            cpu: 500m
-            memory: 500Mi
-          limits:
-            cpu: 10000m
-            memory: 1024Mi
+        #resources: # Optional resource requests and limits
+         # requests:
+          #  cpu: 500m
+           # memory: 500Mi
+          #limits:
+           # cpu: 10000m
+            #memory: 1024Mi
 ---
 apiVersion: v1
 kind: Service
